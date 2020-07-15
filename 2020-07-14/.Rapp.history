@@ -1,0 +1,642 @@
+download.file("https://data.ca.gov/dataset/590188d5-8545-4c93-a9a0-e230f0db7290/resource/926fd08f-cc91-4828-af38-bd45de97f8c3/download/statewide_cases.csv", "statewide_cases.csv")#
+#
+cases <- fread("statewide_cases.csv")
+library(data.table)
+cases <- fread("statewide_cases.csv")
+pop <- fread("../01-manual-cleanup/ca-county-population.csv")
+pop
+pop$population
+as.numeric(pop$population)
+as.integer(pop$population)
+as.integer(pop$population)
+pop <- fread("../01-manual-cleanup/ca-county-population.csv")
+pop
+cases
+cases[, unique(county)]
+pop$county
+cases[, sort(unique(county))]
+sort(pop$county)
+cases
+class(cases$totalcountconfirmed)
+class(cases$date)
+cases[, date := as.Date(date)]
+cases
+class(cases$date)
+cases
+cases <- cases[county != "Out Of Country"]
+cases <- cases[county != "Unassigned"]
+cases
+cases[, unique(county)]
+pop$county
+diff(cases[, unique(county)], pop$county)
+dif(cases[, unique(county)], pop$county)
+union(cases[, unique(county)], pop$county)
+help(union)
+setdiff(cases[, unique(county)], pop$county)
+pop$county
+ca_county_names <- cases[, sort(unique(county))]
+ca_county_names
+cases[, min(date)]
+date_earliest <- cases[, min(date)]
+date_latest <- cases[, max(date)]
+date_latest
+cases
+pop
+cases <- merge(cases, pop, by="county")
+cases
+cases[, totalcountconfirmed100k := totalcountconfirmed / population * 100000]
+cases
+cases[, newcountconfirmed100k := newcountconfirmed / population * 100000]
+cases
+cases2 <- dcast(cases, data~county)
+cases2
+cases2 <- dcast(cases, date~county)
+cases2
+cases_total <- dcast(cases, date~county, value.var="totalcountconfirmed")
+cases_total
+cases_total100k <- dcast(cases, date~county, value.var="totalcountconfirmed")
+cases
+cases_total100k <- dcast(cases, date~county, value.var="totalcountconfirmed100k")
+cases_total100k
+cases[, totalcountconfirmed100k := round(totalcountconfirmed / population * 100000, 3)]
+cases[, newcountconfirmed100k := round(newcountconfirmed / population * 100000, 3)]
+cases_total <- dcast(cases, date~county, value.var="totalcountconfirmed")
+cases_total100k <- dcast(cases, date~county, value.var="totalcountconfirmed100k")
+cases_total100k
+cases
+cases_new <- dcast(cases, date~county, value.var="newcountconfirmed")#
+cases_new100k <- dcast(cases, date~county, value.var="newcountconfirmed100k")
+cases_new
+cases_new100k
+library(plotly)
+plot_ly() %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda", line=list(color="green")) %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~"Santa Clara", name="Santa Clara", line=list(color="red")) %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)))
+plot_ly() %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda", line=list(color="green")) %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~`Santa Clara`, name="Santa Clara", line=list(color="red")) %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)))
+plot_ly() %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda", line=list(color="green")) %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~`Santa Clara`, name="Santa Clara", line=list(color="red")) %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+plot_ly() %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda") %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~`Santa Clara`, name="Santa Clara") %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+for (i in 1:length(ca_county_names)){#
+	print(ca_county_names[i])#
+}
+for (i in 1:length(ca_county_names)){#
+	target_county <- get(ca_county_names[i])#
+	print(paste(target_county, "hahaha", sep=" "))#
+}
+target_county
+get(ca_county_names[i])
+help(get)
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county) %>%#
+}
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test
+add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+target_county
+target_county
+test
+test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+plot_ly() %>%#
+	add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda") %>%
+layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test
+test <-
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+test
+ca_county_names
+target_county
+test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test
+1:length(ca_county_names)
+ca_county_names[i]
+ca_county_names[1]
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	print(target_county)#
+#	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~Alameda, name="Alameda")
+test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~`Santa Clara`, name="Santa Clara")
+test
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+target_county <- ca_county_names[1]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+target_county <- ca_county_names[2]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+target_county <- ca_county_names[3]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+target_county <- ca_county_names[1]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test
+target_county <- ca_county_names[2]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test
+target_county <- ca_county_names[3]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)
+test
+target_county
+target_county
+target_county <- ca_county_names[2]
+target_county
+test
+get(target_county)
+test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county))
+test
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+for (i in 1:length(ca_county_names)){#
+#	target_county <- ca_county_names[i]#
+	test <- test %>% add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~ca_county_names[i], name=~ca_county_names[i])#
+}
+test
+cases_total
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- add_trace(data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- add_trace(test, data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=~target_county)#
+}
+test
+dim(cases_total)
+cases_total
+dim(cases_total)[2]
+dim(cases_total)
+cases_total[, date]
+temp_dt <- data.table(date=cases_total[, date], y=cases_total[2])
+temp_dt
+temp_dt <- data.table(date=cases_total[, date], y=cases_total[, 2])
+temp_dt
+target_county <- ca_county_names[2]
+temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])
+temp_dt
+ca_county_names[2]
+target_county <- ca_county_names[1]
+target_county
+temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])
+temp_dt
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])#
+	test <- add_trace(test, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=~ca_county_names[i])#
+}
+test
+test
+ca_county_names[i]
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])#
+	test <- add_trace(test, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}
+test
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- add_trace(test, data=cases_total, type="scatter", mode="lines", x=~date, y=get(target_county), name=target_county)#
+}
+test <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	test <- add_trace(test, data=cases_total, type="scatter", mode="lines", x=~date, y=~get(target_county), name=target_county)#
+}
+target_county
+test
+# cummulative # of cases#
+fig_cummu_raw <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])#
+	fig_cummu_raw <- add_trace(fig_cummu_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+#
+fig_cummu_raw
+# cummulative # of cases / 100k#
+fig_cummu_100k <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total100k[, date], y=cases_total100k[, get(target_county)])#
+	fig_cummu_100k <- add_trace(fig_cummu_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}
+fig_cummu_100k
+# new cases#
+fig_new <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new[, date], y=cases_new[, get(target_county)])#
+	fig_new <- add_trace(fig_new, data=temp_dt, type="scatter", mode="markers", x=~date, y=~y, name=ca_county_names[i])#
+}
+fig_new
+# new cases#
+fig_new <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new[, date], y=cases_new[, get(target_county)])#
+	fig_new <- add_trace(fig_new, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}
+fig_new
+# new cases#
+fig_new_raw <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new[, date], y=cases_new[, get(target_county)])#
+	fig_new_raw <- add_trace(fig_new_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}
+# new cases per 100k#
+fig_new_100k <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new100k[, date], y=cases_new100k[, get(target_county)])#
+	fig_new_100k <- add_trace(fig_new_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}
+fig_new_100k
+fig_new_raw
+cases_new_7day <- cases_new
+cases_new_7day
+# Calculate (smoothed) 7-day average for the day change#
+# feed in a vector, returns a vector#
+seven_day_mean <- function(x){#
+#
+	# initialize#
+	placeholder <- NULL#
+	# loop through each row#
+	vectorlength <- length(x)#
+	for (i in 1:vectorlength){#
+#
+		# for first 6 rows, calculate the mean from row 1 to current row#
+		if (i %in% 1:6){#
+			targetmean <- mean(x[1:i], na.rm=T)#
+		} #
+		# otherwise, calculate mean from current-6th row to current row#
+		else {#
+			targetmean <- mean(x[(i-6):i], na.rm=T)#
+		} #
+		placeholder <- c(placeholder, round(targetmean, 3))#
+#
+	}#
+#
+	# return the resulted vector	#
+	return(placeholder)#
+}
+cases_new_7day
+cases_new_7day <- cases_new
+cases_new_7day[, Alameda := seven_day_mean(Alameda)]
+cases_new_7day
+cases_new_7day <- cases_new
+for(i in ca_county_names) print(i)
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day
+cases_new
+cases_new <- dcast(cases, date~county, value.var="newcountconfirmed")
+cases_new_7day[, (ca_county_names) <- lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day
+cases_new
+cases_new_7day <- cases_new
+cases_new_7day
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new
+cases_new_7day
+tracemem(cases_new)
+tracemem(cases_new_7day)
+cases_new <- dcast(cases, date~county, value.var="newcountconfirmed")
+tracemem(cases_new)#
+tracemem(cases_new_7day)
+cases_new_7day <- copy(cases_new)
+tracemem(cases_new)#
+tracemem(cases_new_7day)
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day
+cases_new
+cases_new_7day
+cases_new_7day_100k <- copy(cases_new100k)
+tracemem(cases_new100k)
+cases_new_7day
+tracemem(cases_new_7day_100k)
+tracemem(cases_new100k)
+tracemem(cases_new_7day_100k)
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day_100k
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day_100k
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day_100k
+cases_new_7day_100k <- copy(cases_new100k)
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+cases_new_7day_100k
+cases_new100k
+cases_new_7day_100k
+# new cases, 7-day average#
+fig_new_7day <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day[, date], y=cases_new_7day[, get(target_county)])#
+	fig_new_7day <- add_trace(fig_new_7day, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}
+fig_new_7day
+cases_new_7day
+# new cases, 7-day average, per 100k population#
+fig_new_7day_100k <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases per 100k population, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day_100k[, date], y=cases_new_7day_100k[, get(target_county)])#
+	fig_new_7day_100k <- add_trace(fig_new_7day_100k, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}
+fig_new_7day_100k
+###################
+# Make dashboard ##
+###################
+#
+# make dashboard, copy to root directory#
+rmarkdown::render(input = "index.Rmd")#
+file.copy("index.html", "../docs/", overwrite=T)
+library(data.table)#
+library(plotly)#
+# Get current time for later use#
+currenttime <- paste("Last updated: ", format(Sys.time(), "%Y-%m-%d %H:%M"), " (Pacific Time)", sep="")#
+#
+# load source#
+download.file("https://data.ca.gov/dataset/590188d5-8545-4c93-a9a0-e230f0db7290/resource/926fd08f-cc91-4828-af38-bd45de97f8c3/download/statewide_cases.csv", "statewide_cases.csv")#
+cases <- fread("statewide_cases.csv")#
+pop <- fread("../01-manual-cleanup/ca-county-population.csv")#
+# mini clean up#
+cases[, date := as.Date(date)]#
+cases <- cases[county != "Out Of Country"]#
+cases <- cases[county != "Unassigned"]#
+# get some basic info#
+ca_county_names <- cases[, sort(unique(county))]#
+date_earliest <- cases[, min(date)]#
+date_latest <- cases[, max(date)]#
+# might be stupid but allows me to vectorize the calculation:#
+# merge the population into the "cases" data.table, #
+# then calculate the per100k numbers#
+cases <- merge(cases, pop, by="county")#
+cases[, totalcountconfirmed100k := round(totalcountconfirmed / population * 100000, 3)]#
+cases[, newcountconfirmed100k := round(newcountconfirmed / population * 100000, 3)]#
+# dcast into different data.tables#
+cases_total <- dcast(cases, date~county, value.var="totalcountconfirmed")#
+cases_total100k <- dcast(cases, date~county, value.var="totalcountconfirmed100k")#
+cases_new <- dcast(cases, date~county, value.var="newcountconfirmed")#
+cases_new100k <- dcast(cases, date~county, value.var="newcountconfirmed100k")#
+# Calculate (smoothed) 7-day average for the day change#
+# feed in a vector, returns a vector#
+seven_day_mean <- function(x){#
+#
+	# initialize#
+	placeholder <- NULL#
+	# loop through each row#
+	vectorlength <- length(x)#
+	for (i in 1:vectorlength){#
+#
+		# for first 6 rows, calculate the mean from row 1 to current row#
+		if (i %in% 1:6){#
+			targetmean <- mean(x[1:i], na.rm=T)#
+		} #
+		# otherwise, calculate mean from current-6th row to current row#
+		else {#
+			targetmean <- mean(x[(i-6):i], na.rm=T)#
+		} #
+		placeholder <- c(placeholder, round(targetmean, 3))#
+#
+	}#
+#
+	# return the resulted vector	#
+	return(placeholder)#
+}#
+# copy data.tables to avoid subassignment#
+cases_new_7day <- copy(cases_new)#
+cases_new_7day_100k <- copy(cases_new100k)#
+#
+# calculate 7-day average#
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]#
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]#
+##########
+# plots ##
+##########
+#
+# cummulative # of cases#
+fig_cummu_raw <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])#
+	fig_cummu_raw <- add_trace(fig_cummu_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# cummulative # of cases / 100k#
+fig_cummu_100k <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total100k[, date], y=cases_total100k[, get(target_county)])#
+	fig_cummu_100k <- add_trace(fig_cummu_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases#
+fig_new_raw <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new[, date], y=cases_new[, get(target_county)])#
+	fig_new_raw <- add_trace(fig_new_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases per 100k#
+fig_new_100k <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new100k[, date], y=cases_new100k[, get(target_county)])#
+	fig_new_100k <- add_trace(fig_new_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases, 7-day average#
+fig_new_7day <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day[, date], y=cases_new_7day[, get(target_county)])#
+	fig_new_7day <- add_trace(fig_new_7day, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}#
+# new cases, 7-day average, per 100k population#
+fig_new_7day_100k <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases per 100k population, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day_100k[, date], y=cases_new_7day_100k[, get(target_county)])#
+	fig_new_7day_100k <- add_trace(fig_new_7day_100k, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}#
+###################
+# Make dashboard ##
+###################
+#
+# make dashboard, copy to root directory#
+rmarkdown::render(input = "index.Rmd")#
+file.copy("index.html", "../docs/", overwrite=T)
+rmarkdown::render(input = "index.Rmd")
+rmarkdown::render(input = "index.Rmd")
+rmarkdown::render(input = "index.Rmd")
+rmarkdown::render(input = "index.Rmd")
+file.copy("index.html", "../docs/", overwrite=T)
