@@ -1,0 +1,1045 @@
+plot_geo(data=ca_county_sf)
+plot_ly() %>% #
+	add_trace(type="choroplethmapbox", data=ca_county_sf)
+plot_ly() %>% #
+	add_trace(type="choropleth", data=ca_county_sf)
+plot_geo(data=ca_county_sf)
+plot_mapbox(data=ca_county_sf)
+geom_sf(data=ca_county_sf)
+plot_geo(data=ca_county_sf) %>%#
+	add_trace(z=~SEVENDAY100K)
+plot_geo(data=ca_county_sf)
+plot_geo(data=st_transform(ca_county_sf, 4326)) %>%#
+	add_trace(z=~SEVENDAY100K)
+st_transform(ca_county_sf, 4326)
+plot_geo() %>%#
+	add_trace(data=ca_county_sf, #
+		split=~NAME, z=~SEVENDAY100K, colorscale='Viridis',#
+		colorbar=list(title="New cases/100k pop., 7-day average"), x=1, y=0.5) %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(data=ca_county_sf, #
+		split=~NAME, z=~SEVENDAY100K, colorscale='Viridis',#
+		colorbar=list(title="New cases/100k pop., 7-day average"), x=1, y=0.5) %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(type="scatter", data=ca_county_sf, #
+		split=~NAME, z=~SEVENDAY100K, colorscale='Viridis',#
+		colorbar=list(title="New cases/100k pop., 7-day average"), x=1, y=0.5) %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(type="scatter", data=ca_county_sf, #
+		split=~NAME, z=~SEVENDAY100K, colorscale='Viridis') %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(type="scatter", data=ca_county_sf, #
+		split=~NAME, color=~SEVENDAY100K, colorscale='Viridis') %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(type="scatter", data=ca_county_sf, #
+		split=~NAME, color=~SEVENDAY100K, colorscale='Viridis',#
+		colorbar=list(title="New cases/100k pop., 7-day average"), x=1, y=0.5) %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly(type="scatter", data=ca_county_sf, #
+		split=~NAME, color=~SEVENDAY100K, colorscale='Viridis') %>%#
+	layout(legend = list(x=0, y=1))
+plot_ly
+library(leaflet)
+r_birthplace_map <- leaflet() %>%#
+  addTiles() %>%  # use the default base map which is OpenStreetMap tiles#
+  addMarkers(lng=174.768, lat=-36.852,#
+             popup="The birthplace of R")#
+r_birthplace_map
+library(osmdata)
+q1 <- opq('Sevilla') %>%#
+    add_osm_feature(key = 'highway', value = 'cycleway')#
+cway_sev <- osmdata_sp(q1)#
+sp::plot(cway_sev$osm_lines)
+cway_sev
+oqp_ca <- opq('California')
+opq_ca
+oqp_ca
+opq_ca <- opq('California') %>%#
+    add_osm_feature(key = 'highway', value = 'cycleway')
+opq_ca
+cway_sev <- osmdata_sp(opq_ca)
+cway_sev
+sp::plot(cway_sev$osm_lines)
+cway_ca <- osmdata_sp(opq_ca)
+library(sf)
+help(sf)
+ca_county_sf <- st_read("data/cnty24k09_1_multipart.shp")
+ca_county_sf
+leaflet(ca_county_sf)
+leaflet(ca_county_sf$geometry)
+ca_county_sf <- shapefile("data/cnty24k09_1_multipart.shp")
+library(raster)
+ca_county_sf <- shapefile("data/cnty24k09_1_multipart.shp")
+leaflet(ca_county_sf)
+ca_county_map <- shapefile("data/cnty24k09_1_multipart.shp")
+leaflet(data=ca_county_map) %>%#
+	addTiles() %>%#
+	addProviderTiles(providers$OpenStreetMap)
+leaflet(data=ca_county_map) %>%#
+	addTiles(geometry) %>%#
+	addProviderTiles(providers$OpenStreetMap)
+ca_county_map
+class(ca_county_map)
+ca_county_sf <- st_read("data/cnty24k09_1_multipart.shp")
+ca_county_sf
+class(ca_county_sf)
+leaflet(ca_county_sf$geometry)
+leaflet(ca_county_sf) %>%#
+	addTiles() %>%#
+	addProviderTiles(providers$OpenStreetMap)
+ca_county_sf
+plot(ca_county_sf)
+plot(ca_county_sf[NAME_PCASE])
+ca_county_sf[1:10]
+ca_county_sf$NAME_PCASE
+ca_county_sf[11:20]
+dim(ca_county_sf)
+ca_county_sf[1:20]
+ca_county_sf[1:10]
+ca_county_sf[11]
+ca_county_sf[12]
+dim(ca_county_sf)
+ca_county_sf <- st_read("../_01-manual-cleanup/CA_Counties_TIGER2016.shp")
+dim(ca_county_sf)
+ca_county_sf
+ca_county_sf$AWATER
+plot(ca_county_sf$AWATER)
+plot(ca_county_sf[AWATER])
+plot(ca_county_sf["AWATER"])
+leaflet(ca_county_sf$geometry) %>%#
+	addTiles() %>%#
+	addProviderTiles(providers$OpenStreetMap)
+leaflet(ca_county_sf) %>%#
+	addTiles(ca_county_sf$geometry) %>%#
+	addProviderTiles(providers$OpenStreetMap)
+leaflet(ca_county_sf) %>%#
+	addPolygons(ca_county_sf$geometry) %>%#
+	addProviderTiles(providers$OpenStreetMap)
+leaflet(ca_county_sf) %>%#
+	addPolygons() %>%#
+	addProviderTiles(providers$OpenStreetMap)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addTiles() %>%#
+  addMarkers(11.965053, 57.70451)
+leaflet() %>%#
+	addPolygons(ca_county_sf)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addTiles() %>%#
+  addMarkers(11.965053, 57.70451) %>%#
+  addProviderTiles(providers$Stamen.Toner)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addMarkers(11.965053, 57.70451) %>%#
+  addProviderTiles(providers$Stamen.Toner)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addMarkers(11.965053, 57.70451) %>%#
+  addProviderTiles(providers$CartoDB.Positron)
+help(addProviderTiles)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addMarkers(11.965053, 57.70451) %>%#
+  addProviderTiles(providers$Stamen.TonerLite)
+leaflet() %>%#
+  setView(11.965053, 57.70451, 16) %>%#
+  addMarkers(11.965053, 57.70451) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(36.365491, -120.118255, 16) %>%#
+  addMarkers(36.365491, -120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(36.365491, -120.118255, 10) %>%#
+  addMarkers(36.365491, -120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(36.365491, 120.118255, 10) %>%#
+  addMarkers(36.365491, 120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+help(setView)
+leaflet() %>%#
+  setView(-71.0382679, 42.3489054, zoom = 18, zoom=18) %>%#
+  addMarkers(36.365491, 120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(-71.0382679, 42.3489054, zoom=18) %>%#
+  addMarkers(36.365491, 120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(-71.0382679, 42.3489054, zoom=6) %>%#
+  addMarkers(36.365491, 120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(36.365491, -120.118255, zoom=7) %>%#
+  addMarkers(36.365491, 120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(36.365491, -120.118255, zoom=7) %>%#
+  addMarkers(36.365491, -120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(41 24.2028, 2 10.4418, zoom=7) %>%#
+  addMarkers(36.365491, -120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(41.40338, 2.17403, zoom=7) %>%#
+  addMarkers(36.365491, -120.118255) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+help(setView)
+leaflet() %>% addTiles() %>% setView(-71.0382679, 42.3489054, zoom = 18)
+leaflet() %>%#
+  setView(-120.118255, 36.365491, zoom=7) %>%#
+  addMarkers(-120.118255, 36.365491) %>%#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+  setView(-120.118255, 36.365491, zoom=7)
+leaflet() %>%#
+  setView(-120.118255, 36.365491, zoom=7) %>%#
+  addTile()
+leaflet() %>%#
+  setView(-120.118255, 36.365491, zoom=7) %>%#
+  addTiles()
+leaflet() %>%#
+  setView(-120.118255, 36.365491, zoom=6) %>%#
+  addTiles()
+leaflet() %>%#
+  setView(-119.449444, 37.166111, zoom=6) %>%#
+  addTiles()
+leaflet() %>%#
+  setView(-119.449444, 37.166111, zoom=6) %>%#
+#  addTiles()#
+  addProviderTiles(providers$Stamen.TonerLite)
+leaflet() %>%#
+  setView(-119.449444, 37.166111, zoom=6) %>%#
+#  addTiles()#
+#  addProviderTiles(providers$Stamen.TonerLite)#
+  addProviderTiles(providers$CartoDB.Positron)
+ca_county_sf <- sf_read("data/cnty24k09_1_multipart.shp")
+ca_county_sf
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_sf$geometry) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_sf) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+library(sf)#
+ca_county_sf <- st_read("../_01-manual-cleanup/CA_Counties_TIGER2016.shp")
+ca_county_latlon <- spTransform(ca_county_sf, CRS("+proj=longlat +datum=WGS84"))
+ca_county_latlon <- st_transform(select(ca_county_sf,geometry), 4326)
+ca_county_latlon <- st_transform(ca_county_sf, 4326)
+ca_county_latlon
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_latlon) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+ca_county_sf <- st_read("../_01-manual-cleanup/CA_Counties_TIGER2016.shp")
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_sf) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+ca_county_sf
+help(st_transform)
+ca_county_lnglat <- st_transform(ca_county_sf, 4326)
+ca_county_lnglat
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_sf) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(ca_county_sf$geometry) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+class(ca_county_sf)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_sf) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_sf) %>%#
+	addTiles()
+ca_county_sf
+ca_county_lnglat <- st_transform(ca_county_sf, "+init=epsg:4326")
+ca_county_lnglat
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat) %>%#
+	addTiles()
+help(addPolygons)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black") %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1) %>%#
+#	addTiles()#
+#	addProviderTiles(providers$Stamen.TonerLite)#
+	addProviderTiles(providers$CartoDB.Positron)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1) %>%#
+#	addTiles()#
+	addProviderTiles(providers$Stamen.TonerLite)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1, opacity=0.3) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1, opacity=0.1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.5) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75) %>%#
+	addTiles()
+library(data.table)#
+library(plotly)#
+# Get current time for later use#
+currenttime <- paste("Last updated: ", format(Sys.time(), "%Y-%m-%d %H:%M"), " (Pacific Time)", sep="")#
+#
+# load source#
+download.file("https://data.ca.gov/dataset/590188d5-8545-4c93-a9a0-e230f0db7290/resource/926fd08f-cc91-4828-af38-bd45de97f8c3/download/statewide_cases.csv", "statewide_cases.csv")#
+cases <- fread("statewide_cases.csv")#
+pop <- fread("../_01-manual-cleanup/ca-county-population.csv")
+# mini clean up#
+cases[, date := as.Date(date)]#
+cases <- cases[county != "Out Of Country"]#
+cases <- cases[county != "Unassigned"]#
+# get some basic info#
+ca_county_names <- cases[, sort(unique(county))]#
+date_earliest <- cases[, min(date)]#
+date_latest <- cases[, max(date)]#
+# might be stupid but allows me to vectorize the calculation:#
+# merge the population into the "cases" data.table, #
+# then calculate the per100k numbers#
+cases <- merge(cases, pop, by="county")#
+cases[, totalcountconfirmed100k := round(totalcountconfirmed / population * 100000)]#
+cases[, newcountconfirmed100k := round(newcountconfirmed / population * 100000)]#
+# dcast into different data.tables#
+cases_total <- dcast(cases, date~county, value.var="totalcountconfirmed")#
+cases_total100k <- dcast(cases, date~county, value.var="totalcountconfirmed100k")#
+cases_new <- dcast(cases, date~county, value.var="newcountconfirmed")#
+cases_new100k <- dcast(cases, date~county, value.var="newcountconfirmed100k")#
+# Calculate (smoothed) 7-day average for the day change#
+# feed in a vector, returns a vector#
+seven_day_mean <- function(x){#
+#
+	# initialize#
+	placeholder <- NULL#
+	# loop through each row#
+	vectorlength <- length(x)#
+	for (i in 1:vectorlength){#
+#
+		# for first 6 rows, calculate the mean from row 1 to current row#
+		if (i %in% 1:6){#
+			targetmean <- mean(x[1:i], na.rm=T)#
+		} #
+		# otherwise, calculate mean from current-6th row to current row#
+		else {#
+			targetmean <- mean(x[(i-6):i], na.rm=T)#
+		} #
+		placeholder <- c(placeholder, round(targetmean, 3))#
+#
+	}#
+#
+	# return the resulted vector	#
+	return(placeholder)#
+}#
+# copy data.tables to avoid subassignment#
+cases_new_7day <- copy(cases_new)#
+cases_new_7day_100k <- copy(cases_new100k)#
+#
+# calculate 7-day average#
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]#
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]#
+##########
+# plots ##
+##########
+#
+# cummulative # of cases#
+fig_cummu_raw <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total[, date], y=cases_total[, get(target_county)])#
+	fig_cummu_raw <- add_trace(fig_cummu_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# cummulative # of cases / 100k#
+fig_cummu_100k <- #
+plot_ly() %>%#
+	layout(title="Cumulative # of COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_total100k[, date], y=cases_total100k[, get(target_county)])#
+	fig_cummu_100k <- add_trace(fig_cummu_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases#
+fig_new_raw <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new[, date], y=cases_new[, get(target_county)])#
+	fig_new_raw <- add_trace(fig_new_raw, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases per 100k#
+fig_new_100k <- #
+plot_ly() %>%#
+	layout(title="Daily new COVID-19 cases per 100k population",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new100k[, date], y=cases_new100k[, get(target_county)])#
+	fig_new_100k <- add_trace(fig_new_100k, data=temp_dt, type="scatter", mode="lines", x=~date, y=~y, name=ca_county_names[i])#
+}#
+# new cases, 7-day average#
+fig_new_7day <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day[, date], y=cases_new_7day[, get(target_county)])#
+	fig_new_7day <- add_trace(fig_new_7day, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}#
+# new cases, 7-day average, per 100k population#
+fig_new_7day_100k <- #
+plot_ly() %>%#
+	layout(title="New COVID-19 cases per 100k population, 7-day average",#
+		xaxis=list(title="Dates", range=c(date_earliest-1, date_latest +1)),#
+		yaxis=list(title="# of new cases / 100k population, 7-day average"))#
+#
+for (i in 1:length(ca_county_names)){#
+	target_county <- ca_county_names[i]#
+	temp_dt <- data.table(date=cases_new_7day_100k[, date], y=cases_new_7day_100k[, get(target_county)])#
+	fig_new_7day_100k <- add_trace(fig_new_7day_100k, data=temp_dt, type="scatter", mode="lines", #
+								x=~date, y=~y, name=ca_county_names[i], line=list(shape="spline"))#
+}
+library(sf)#
+ca_county_sf <- st_read("../_01-manual-cleanup/CA_Counties_TIGER2016.shp")
+library(sf)#
+library(leaflet)
+ca_county_sf
+ca_county_lnglat <- st_transform(ca_county_sf, "+init=epsg:4326")
+ca_county_lnglat
+)
+class(ca_county_lnglat)
+# extract the latest 7-day numbers, melt them into 2-column format#
+# also extract "current_date" for plot titles#
+new_7day_latest <- cases_new_7day[dim(cases_new_7day)[1]]#
+new_7day_latest <- melt(new_7day_latest, id.vars=c("date"), measure.vars=ca_county_names)#
+current_date <- unique(new_7day_latest$date)#
+new_7day_latest$date <- NULL#
+names(new_7day_latest) <- c("NAME", "SEVENDAY")#
+#
+new_7day_latest_100k <- cases_new_7day_100k[dim(cases_new_7day_100k)[1]]#
+new_7day_latest_100k <- melt(new_7day_latest_100k, id.vars=c("date"), measure.vars=ca_county_names)#
+new_7day_latest_100k$date <- NULL#
+names(new_7day_latest_100k) <- c("NAME", "SEVENDAY100K")
+# combine 7-day numbers with the #
+ca_county_lnglat <- merge(ca_county_lnglat, new_7day_latest, by="NAME")#
+ca_county_lnglat <- merge(ca_county_lnglat, new_7day_latest_100k, by="NAME")
+ca_county_lnglat
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75,#
+				fillColor = ~colorQuantile("YlOrRd", new_7day_latest_100k)(new_7day_latest_100k),) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75,#
+				fillColor = ~colorQuantile("YlOrRd", new_7day_latest_100k)(new_7day_latest_100k)) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75,#
+				fillColor="red") %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75,#
+				fillColor="red", fillOpacity=0.1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="white", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="white", weight=1, dashArray="3",#
+				fillColor="red", fillOpacity=0.1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight = 5, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE)#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE)#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME)#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, "\n", ca_county_lnglat$new_7day_latest_100k, " cases per 100k, 7-day average")#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, ca_county_lnglat$new_7day_latest_100k, " cases per 100k, 7-day average")#
+				) %>%#
+	addTiles()
+ca_county_lnglat$new_7day_latest_100k
+new_7day_latest_100k
+new_7day_latest_100k
+ca_county_lnglat
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K, " cases per 100k, 7-day average")#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, "<br/>", ca_county_lnglat$SEVENDAY100K, " cases per 100k, 7-day average")#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, ": ", ca_county_lnglat$SEVENDAY100K, " cases per 100k, 7-day average")#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=paste(ca_county_lnglat$NAME, ": ", ca_county_lnglat$SEVENDAY100K, #
+							" cases per 100k, 7-day average", sep="")#
+				) %>%#
+	addTiles()
+sprintf
+sprintf(#
+  "<strong>%s</strong><br/>%g people / mi<sup>2</sup>",#
+  ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K)
+%g
+sprintf(#
+  "<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K)
+label_SEVENDAY100K <- sprintf(#
+  "<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+label_SEVENDAY100K <- sprintf(#
+  "<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>% lapply(htmltools::HTML)
+label_SEVENDAY100K
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.7, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.5, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.4, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor="red", fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.5, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+ca_county_lnglat$SEVENDAY100K
+hist(ca_county_lnglat$SEVENDAY100K)
+hist(ca_county_lnglat$SEVENDAY)
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 50))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 100))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 1000))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10), xlim=c(0, 1000))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10), xlim=c(0, 1000))
+hist(ca_county_lnglat$SEVENDAY100K)
+help(colorbin)
+help(colorBin)
+help(palette)
+hist(ca_county_lnglat$SEVENDAY100K)
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)
+palette_SEVENDAY100K <- colorBin("YlOrRd", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.1, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.5, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.5, #
+				highlight = highlightOptions(weight=10, color = "#666", #
+											dashArray = "", fillOpacity = 0.5, #
+											bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.5, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.75, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("YlOrRd", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.75, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("Greens", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.75, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.75, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=1, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+colorBin("Reds")
+colorBin("Reds", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)
+help(colorBin)
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("RdYlBu", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/100k, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10), xlim=c(0, 1000))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 10), xlim=c(0, 200))
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 200))
+bins_SEVENDAY100K <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY100K <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY100K, bins=bins_SEVENDAY100K)#
+label_SEVENDAY100K <- sprintf("<strong>%s</strong><br/>%g cases/day/100k pop., 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY100K) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+bins_SEVENDAY <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+palette_SEVENDAY <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY, bins=bins_SEVENDAY)#
+label_SEVENDAY <- sprintf("<strong>%s</strong><br/>%g new cases/day, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 200))
+hist(ca_county_lnglat$SEVENDAY)
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 200))
+ln(1)
+log(1)
+log(2)
+log(10)
+log(100)
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 5), xlim=c(0, 200))
+hist(ca_county_lnglat$SEVENDAY100K)
+hist(ca_county_lnglat$SEVENDAY)
+hist(ca_county_lnglat$SEVENDAY, breaks=seq(0, 5000, 100))
+bins_SEVENDAY <- c(0, 5, 25, 50, 100, 150, 200, 500, 1000, Inf)
+palette_SEVENDAY <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY, bins=bins_SEVENDAY)#
+label_SEVENDAY <- sprintf("<strong>%s</strong><br/>%g new cases/day, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+bins_SEVENDAY <- c(0, 5, 10, 25, 50, 100, 150, 200, 500, 1000, Inf)#
+palette_SEVENDAY <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY, bins=bins_SEVENDAY)#
+label_SEVENDAY <- sprintf("<strong>%s</strong><br/>%g new cases/day, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+# Calculate (smoothed) 7-day average for the day change#
+# feed in a vector, returns a vector#
+seven_day_mean <- function(x){#
+#
+	# initialize#
+	placeholder <- NULL#
+	# loop through each row#
+	vectorlength <- length(x)#
+	for (i in 1:vectorlength){#
+#
+		# for first 6 rows, calculate the mean from row 1 to current row#
+		if (i %in% 1:6){#
+			targetmean <- mean(x[1:i], na.rm=T)#
+		} #
+		# otherwise, calculate mean from current-6th row to current row#
+		else {#
+			targetmean <- mean(x[(i-6):i], na.rm=T)#
+		} #
+		placeholder <- c(placeholder, round(targetmean, 2))#
+#
+	}#
+#
+	# return the resulted vector	#
+	return(placeholder)#
+}#
+# copy data.tables to avoid subassignment#
+cases_new_7day <- copy(cases_new)#
+cases_new_7day_100k <- copy(cases_new100k)#
+#
+# calculate 7-day average#
+cases_new_7day[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]#
+cases_new_7day_100k[, (ca_county_names) := lapply(.SD, seven_day_mean), .SDcols=ca_county_names]
+#########
+# maps ##
+#########
+#
+library(sf)#
+library(leaflet)#
+#
+ca_county_sf <- st_read("../_01-manual-cleanup/CA_Counties_TIGER2016.shp")#
+# transform CRS: 3857 to EPSG 4326 for leaflet plotting#
+# https://stackoverflow.com/questions/44977471/transform-a-multipolygon-sf-object-in-r-from-xy-coordinates-to-lat-lon#
+ca_county_lnglat <- st_transform(ca_county_sf, "+init=epsg:4326")#
+# extract the latest 7-day numbers, melt them into 2-column format#
+# also extract "current_date" for plot titles#
+new_7day_latest <- cases_new_7day[dim(cases_new_7day)[1]]#
+new_7day_latest <- melt(new_7day_latest, id.vars=c("date"), measure.vars=ca_county_names)#
+current_date <- unique(new_7day_latest$date)#
+new_7day_latest$date <- NULL#
+names(new_7day_latest) <- c("NAME", "SEVENDAY")#
+#
+new_7day_latest_100k <- cases_new_7day_100k[dim(cases_new_7day_100k)[1]]#
+new_7day_latest_100k <- melt(new_7day_latest_100k, id.vars=c("date"), measure.vars=ca_county_names)#
+new_7day_latest_100k$date <- NULL#
+names(new_7day_latest_100k) <- c("NAME", "SEVENDAY100K")#
+# combine 7-day numbers with the #
+ca_county_lnglat <- merge(ca_county_lnglat, new_7day_latest, by="NAME")#
+ca_county_lnglat <- merge(ca_county_lnglat, new_7day_latest_100k, by="NAME")#
+colorpalette_red <- c("#FDEDEC", "#FADBD8", "#F5B7B1", "#F1948A", "#EC7063", #
+					"#E74C3C", "#CB4335", "#B03A2E", "#943126", "#78281F")#
+# make bins, colors, labels, then plot map#
+# cf https://rstudio.github.io/leaflet/choropleths.html#
+# bins_SEVENDAY <- c(0, 5, 10, 15, 20, 25, 30, 35, 40, Inf)#
+bins_SEVENDAY <- c(0, 5, 10, 25, 50, 100, 150, 200, 500, 1000, Inf)#
+palette_SEVENDAY <- colorBin("Reds", domain=ca_county_lnglat$SEVENDAY, bins=bins_SEVENDAY)#
+label_SEVENDAY <- sprintf("<strong>%s</strong><br/>%g new cases/day, 7-day average",#
+  							ca_county_lnglat$NAME, ca_county_lnglat$SEVENDAY) %>%#
+  						lapply(htmltools::HTML)#
+#
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+bins_SEVENDAY <- c(0, 2.5, 10, 25, 50, 100, 150, 200, 500, 1000, Inf)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+bins_SEVENDAY <- c(0, 2.5, 10, 25, 50, 100, 200, 500, 1000, Inf)
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+map_new_7day <- #
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY(SEVENDAY), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY#
+				) %>%#
+	addTiles()
+map_new_7day_100k <- #
+leaflet() %>%#
+	setView(-119.449444, 37.166111, zoom=6) %>%#
+	addPolygons(data=ca_county_lnglat, color="black", weight=0.75, dashArray="3",#
+				fillColor=~palette_SEVENDAY100K(SEVENDAY100K), fillOpacity=0.7, #
+				highlight = highlightOptions(weight=10, dashArray = "", bringToFront = TRUE), #
+				label=label_SEVENDAY100K#
+				) %>%#
+	addTiles()
+map_new_7day
+rmarkdown::render(input = "index.Rmd")
+file.copy("index.html", "../docs/", overwrite=T)

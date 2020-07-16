@@ -1,0 +1,159 @@
+---
+title: "COVID-19 in California"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    theme: readable
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(plotly)
+```
+
+-----------------------------------------------------------------------
+
+
+
+
+Cumulative # of cases
+==========
+
+Row {.tabset}
+----------
+
+### Raw # of cases
+
+```{r, echo=F}
+fig_cummu_raw
+```
+
+### Cases per 100K population
+
+```{r, echo=F}
+fig_cummu_100k
+```
+
+
+
+Row {data-height=55}
+----------
+
+```{r, echo=F}
+print(currenttime)
+```
+
+
+
+
+
+
+
+
+
+
+New cases by day
+==========
+
+Row {.tabset}
+----------
+
+
+### Raw # of new cases
+
+```{r, echo=F}
+fig_new_raw
+```
+
+
+### New cases per 100K population
+
+```{r, echo=F}
+fig_new_100k
+```
+
+
+Row {data-height=55}
+----------
+```{r, echo=F}
+print(currenttime)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+New cases, 7-day average
+==========
+
+Row {.tabset}
+----------
+
+
+### New cases, 7-day average
+
+```{r, echo=F}
+fig_new_7day
+```
+
+
+
+
+### New cases per 100K population, 7-day average
+
+```{r, echo=F}
+fig_new_7day_100k
+```
+
+
+Row {data-height=55}
+----------
+```{r, echo=F}
+print(currenttime)
+```
+
+
+
+
+
+
+
+
+
+
+
+Maps
+==========
+
+Row {.tabset}
+----------
+
+
+### New cases, 7-day average
+
+```{r, echo=F}
+map_new_7day
+```
+
+
+### New cases per 100K population, 7-day average
+
+```{r, echo=F}
+map_new_7day_100k
+```
+
+
+Row {data-height=55}
+----------
+```{r, echo=F}
+print(currenttime)
+```

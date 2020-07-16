@@ -11,3 +11,4 @@ Covid-19 data for California, by county
 
 ## Updates
 - 2020-07-14: [Link to dashboard](https://tszhim-tsui.github.io/2020-california-counties-covid19)
+- 2020-07-16: Added maps to [dashboard](https://tszhim-tsui.github.io/2020-california-counties-covid19)
